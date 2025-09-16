@@ -7,10 +7,10 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 
 class CategoryRepository extends Repository
 {
-	
+
 	/**
 	 * findAll ersetzen, wegen Sortierung und PIDs
-	 * 
+	 *
 	 * @param	string	$sortBy		Sort by
 	 * @param	string	$sortOrder	Sort order
 	 * @param	array	$pids		Storage PIDs
@@ -31,7 +31,7 @@ class CategoryRepository extends Repository
         $queryBuilder->orderBy($sortBy, $sortOrder);
         return $queryBuilder->executeQuery()->fetchAllAssociative();
 	}
-	
+
 	/**
 	 * getAllCats: all categories in one simple array
 	 *
@@ -76,16 +76,17 @@ class CategoryRepository extends Repository
 		}
 		return $all_cats;
 	}
-	
-	
+
+
 	/**
 	 * getCategoriesAndParents: all categories in a 2D array with parents and childs
 	 *
 	 * @param	array	$all_cats	All categories
 	 * @param	array	$used_cats	Categories of a camaliga entry
+     * @param boolean   $verify_empty return no categories if used_cats is empty?
 	 * @return	array	categories
 	 */
-	public function getCategoriesAndParents($all_cats = [], $used_cats = []) {
+	public function getCategoriesAndParents($all_cats = [], $used_cats = [], $verify_empty = false): array {
 		$cats = [];
 		if (!empty($all_cats)) {
 			$parentUids = [];
@@ -101,7 +102,7 @@ class CategoryRepository extends Repository
 				foreach ($all_cats as $row) {
 					$uid = $row['uid'];
 					$parent = $row['parent'];
-					if ((count($used_cats)==0) || isset($used_cats[$uid])) {
+					if (((count($used_cats)==0) && !$verify_empty) || isset($used_cats[$uid])) {
 						if (($i==1 && isset($parentUids[$uid]) && $parentUids[$uid]==1) || ($i==2)) { // && !$parentUids[$uid])) {
 							// In Durchgang 1 die Parents aufnehmen und in Durchgang 2 die Childs
 							if ($i==1) {

@@ -316,5 +316,7 @@ Version     Changes
 
 13.2.0      Refactoring. You need to use "Flush TYPO3 and PHP Cache"!
 
-13.2.1      New home url: https://github.com/fixpunkt-com/camaliga
+13.2.2      New home url: https://github.com/fixpunkt-com/camaliga
+
+            Bugfix: don´t show evey category if there is no category at the result list.
 ==========  ==============================================================================================================================

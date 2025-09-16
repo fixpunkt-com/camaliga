@@ -75,7 +75,7 @@ class HelpersUtility
             $metaTagManager->addProperty('description', $desc);
         }
         if ($settings['seo']['setIndexedDocTitle'] == 1) {
-            // TODO
+            // TODO: ausbauen, da ab TYPO3 12 internal
             $GLOBALS['TSFE']->indexedDocTitle = $title;
         }
         if ($settings['seo']['setOgTitle'] == 1) {

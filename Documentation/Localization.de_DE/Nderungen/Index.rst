@@ -320,5 +320,7 @@ Version     Änderungen
 
 13.2.0      Refactoring. Man muss alle Caches leeren!
 
-13.2.1      Neue Adresse: https://github.com/fixpunkt-com/camaliga
+13.2.2      Neue Adresse: https://github.com/fixpunkt-com/camaliga
+
+            Bugfix: zeige bei Ergebnissen nicht jede Kategorie an, wenn keine Kategorie da ist.
 ==========  =====================================================================================================================

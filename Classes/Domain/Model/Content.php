@@ -17,7 +17,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  *  Copyright notice
  *
  *  (c) 2013 Kurt Gusbeth <info@Quizpalme.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -50,19 +50,19 @@ class Content extends AbstractValueObject
      * @var \DateTime
      */
     protected $tstamp = null;
-    
+
     /**
      * @var \DateTime
      */
     protected $crdate = null;
-    
+
     /**
      * Sorting
      *
      * @var integer
      */
     protected $sorting = 0;
-    
+
 	/**
   * Title
   *
@@ -91,14 +91,14 @@ class Content extends AbstractValueObject
 	 * @var string
 	 */
 	protected $link;
-	
+
 	/**
 	 * Slug
 	 *
 	 * @var string
 	 */
 	protected $slug;
-	
+
 	/**
   * Image 1
   *
@@ -138,28 +138,28 @@ class Content extends AbstractValueObject
   */
  #[Extbase\ORM\Cascade(['value' => 'remove'])]
  protected $falimage5 = null;
-	
+
 	/**
 	 * Street
 	 *
 	 * @var string
 	 */
 	protected $street;
-	
+
 	/**
 	 * Zip code
 	 *
 	 * @var string
 	 */
 	protected $zip;
-	
+
 	/**
 	 * City
 	 *
 	 * @var string
 	 */
 	protected $city;
-	
+
 	/**
 	 * Country
 	 *
@@ -173,28 +173,28 @@ class Content extends AbstractValueObject
 	 * @var string
 	 */
 	protected $person;
-	
+
 	/**
 	 * Phone number
 	 *
 	 * @var string
 	 */
 	protected $phone;
-	
+
 	/**
 	 * Mobile number
 	 *
 	 * @var string
 	 */
 	protected $mobile;
-	
+
 	/**
 	 * E-Mail
 	 *
 	 * @var string
 	 */
 	protected $email;
-	
+
 	/**
 	 * Latitude
 	 *
@@ -215,7 +215,7 @@ class Content extends AbstractValueObject
 	 * @var float
 	 */
 	protected $distance = 0.0;
-	
+
 	/**
 	 * Custom variable 1
 	 *
@@ -244,14 +244,14 @@ class Content extends AbstractValueObject
   */
  #[Extbase\ORM\Lazy]
  protected $mother;
-	
+
 	/**
   * Categories. Früher: integer
   *
   * @var ObjectStorage<Category>
   */
  protected $categories;
-	
+
 	/**
 	 * Modulo begin
 	 *
@@ -265,7 +265,7 @@ class Content extends AbstractValueObject
 	 * @var integer
 	 */
 	protected $moduloEnd = 0;
-	
+
 
 	/**
 	 * __construct
@@ -276,7 +276,7 @@ class Content extends AbstractValueObject
 		$this->initStorageObjects();
 		$this->categories = new ObjectStorage();
 	}
-	
+
 	/**
 	 * Initializes all ObjectStorage properties
 	 * Do not modify this method!
@@ -287,9 +287,9 @@ class Content extends AbstractValueObject
 	 */
 	protected function initStorageObjects()
 	{
-	
+
 	}
-	
+
 	/**
 	 * Returns the creation date
 	 *
@@ -299,7 +299,7 @@ class Content extends AbstractValueObject
 	{
 	    return $this->crdate;
 	}
-	
+
 	/**
 	 * Returns the last modified date
 	 *
@@ -309,7 +309,7 @@ class Content extends AbstractValueObject
 	{
 	    return $this->tstamp;
 	}
-	
+
 	/**
 	 * Returns the sorting
 	 *
@@ -319,7 +319,7 @@ class Content extends AbstractValueObject
 	{
 	    return $this->sorting;
 	}
-	
+
 	/**
 	 * Sets the sorting
 	 *
@@ -329,7 +329,7 @@ class Content extends AbstractValueObject
 	public function setSorting($sorting): void {
 	    $this->sorting = $sorting;
 	}
-	
+
 	/**
 	 * Gets the title nl2br
 	 *
@@ -339,7 +339,7 @@ class Content extends AbstractValueObject
 		$title = str_replace(["'"], "\'", $this->title);
 		return str_replace(["\r\n", "\r", "\n"], "<br />", $title);
 	}
-	
+
 	/**
 	 * Returns the title
 	 *
@@ -348,7 +348,7 @@ class Content extends AbstractValueObject
 	public function getTitle() {
 		return $this->title;
 	}
-	
+
 	/**
 	 * Sets the title
 	 *
@@ -460,7 +460,7 @@ class Content extends AbstractValueObject
 		}
 		return $links;
 	}
-	
+
 	/**
 	 * Returns the link
 	 *
@@ -479,7 +479,7 @@ class Content extends AbstractValueObject
 	public function setLink($link): void {
 		$this->link = $link;
 	}
-	
+
 	/**
 	 * Returns the slug
 	 *
@@ -488,7 +488,7 @@ class Content extends AbstractValueObject
 	public function getSlug() {
 		return $this->slug;
 	}
-	
+
 	/**
 	 * Sets the slug
 	 *
@@ -498,7 +498,7 @@ class Content extends AbstractValueObject
 	public function setSlug($slug): void {
 		$this->slug = $slug;
 	}
-	
+
 	/**
   * Returns the image
   *
@@ -508,7 +508,7 @@ class Content extends AbstractValueObject
 	{
 		return $this->falimage;
 	}
-	
+
 	/**
   * Sets the falimage
   *
@@ -528,7 +528,7 @@ class Content extends AbstractValueObject
 	{
 		return $this->falimage2;
 	}
-	
+
 	/**
   * Sets the falimage2
   *
@@ -548,7 +548,7 @@ class Content extends AbstractValueObject
 	{
 		return $this->falimage3;
 	}
-	
+
 	/**
   * Sets the falimage3
   *
@@ -568,7 +568,7 @@ class Content extends AbstractValueObject
 	{
 		return $this->falimage4;
 	}
-	
+
 	/**
   * Sets the falimage4
   *
@@ -588,7 +588,7 @@ class Content extends AbstractValueObject
 	{
 		return $this->falimage5;
 	}
-	
+
 	/**
   * Sets the falimage5
   *
@@ -598,7 +598,7 @@ class Content extends AbstractValueObject
 	{
 		$this->falimage5 = $falimage5;
 	}
-	
+
 	/**
 	 * Returns the street
 	 *
@@ -617,7 +617,7 @@ class Content extends AbstractValueObject
 		$tmp = str_replace(["'"], "\'", $this->street);
 		return str_replace(["\r\n", "\r", "\n"], "<br />", $tmp);
 	}
-	
+
 	/**
 	 * Sets the street
 	 *
@@ -627,7 +627,7 @@ class Content extends AbstractValueObject
 	public function setStreet($street): void {
 		$this->street = $street;
 	}
-	
+
 	/**
 	 * Returns the zip
 	 *
@@ -646,7 +646,7 @@ class Content extends AbstractValueObject
 	public function setZip($zip): void {
 		$this->zip = $zip;
 	}
-	
+
 	/**
 	 * Returns the city
 	 *
@@ -665,7 +665,7 @@ class Content extends AbstractValueObject
 	public function setCity($city): void {
 		$this->city = $city;
 	}
-	
+
 	/**
 	 * Returns the country
 	 *
@@ -693,7 +693,7 @@ class Content extends AbstractValueObject
 	public function getPerson() {
 		return $this->person;
 	}
-	
+
 	/**
 	 * Sets the person
 	 *
@@ -703,7 +703,7 @@ class Content extends AbstractValueObject
 	public function setPerson($person): void {
 		$this->person = $person;
 	}
-	
+
 	/**
 	 * Returns the phone
 	 *
@@ -722,7 +722,7 @@ class Content extends AbstractValueObject
 	public function setPhone($phone): void {
 		$this->phone = $phone;
 	}
-	
+
 	/**
 	 * Returns the mobile
 	 *
@@ -741,7 +741,7 @@ class Content extends AbstractValueObject
 	public function setMobile($mobile): void {
 		$this->mobile = $mobile;
 	}
-	
+
 	/**
 	 * Returns the email
 	 *
@@ -760,7 +760,7 @@ class Content extends AbstractValueObject
 	public function setEmail($email): void {
 		$this->email = $email;
 	}
-	
+
 	/**
 	 * Returns the latitude
 	 *
@@ -901,7 +901,7 @@ class Content extends AbstractValueObject
  public function addCategory(Category $category): void {
 		$this->categories->attach($category);
 	}
-	
+
 	/**
   * Removes a Category
   *
@@ -911,7 +911,7 @@ class Content extends AbstractValueObject
  public function removeCategory(Category $categoryToRemove): void {
 		$this->categories->detach($categoryToRemove);
 	}
-	
+
 	/**
   * Sets the categories
   *
@@ -921,7 +921,7 @@ class Content extends AbstractValueObject
  public function setCategories(ObjectStorage $categories): void {
 		$this->categories = $categories;
 	}
-	
+
 	/**
   * Returns the categories
   *
@@ -930,7 +930,7 @@ class Content extends AbstractValueObject
  public function getCategories() {
 		return $this->categories;
 	}
-	
+
 	/**
 	 * Returns the categories: Kategorien und dessen Vater eines Elements
 	 *
@@ -964,7 +964,7 @@ class Content extends AbstractValueObject
 				$used_cats[$cat_uid] = $cat_uid;
 			}
 		}
-		return $categoryRepository->getCategoriesAndParents($all_cats, $used_cats);
+		return $categoryRepository->getCategoriesAndParents($all_cats, $used_cats, true);
 	}
 
 	/**
@@ -975,7 +975,7 @@ class Content extends AbstractValueObject
 	public function getModuloBegin() {
 		return $this->moduloBegin;
 	}
-	
+
 	/**
 	 * Sets the modulo begin
 	 *
@@ -994,7 +994,7 @@ class Content extends AbstractValueObject
 	public function getModuloEnd() {
 		return $this->moduloEnd;
 	}
-	
+
 	/**
 	 * Sets the modulo end
 	 *
@@ -1004,7 +1004,7 @@ class Content extends AbstractValueObject
 	public function setModuloEnd($moduloEnd): void {
 		$this->moduloEnd = $moduloEnd;
 	}
-	
+
 
 	/**
 	 * Returns the extended fields: custom extended fields
@@ -1037,7 +1037,7 @@ class Content extends AbstractValueObject
 		}
 		return $extended;
 	}
-	
+
 	/**
 	 * Repairs a not correct set FAL-reference
 	 *
