@@ -11,14 +11,12 @@ Es handelt sich hierbei um die OpenGeoDB-Tabellen. Die Dokumentation zu OpenGeoD
 
 http://opengeodb.org/wiki/OpenGeoDB_Dokumentation
 
-Die benötigten Tabellen findet man hier:
-
-http://www.fa-technik.adfc.de/code/opengeodb/
+Die benötigten Tabellen findet man nicht mehr online!
 
 Davon werden 4 Tabellen benötigt: opengeodb-begin.sql, opengeodb-end.sql, opengeodb_hier.sql und
 eine der Ländertabellen, z.B. DE.sql. Achtung 2/4 Tabellen sind riesig groß. Man kann die wahrscheinlich nur
 über die mysql-Konsole fehlerfrei importieren. Aus diesen 4 Tabellen muss man eine eine weitere Tabelle erzeugen.
-Die ganze Anleitung dazu findet man `hier
+Die ganze Anleitung dazu findet man unter: `http://opengeodb.org/wiki/OpenGeoDB_-_Umkreissuche
 <http://opengeodb.org/wiki/OpenGeoDB_-_Umkreissuche>`_.
 
 Jedenfalls muss man nach dem Import noch folgende SQL-Statements ausführen (ersetze "de" durch dein Länderkürzel)::

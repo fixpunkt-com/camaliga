@@ -323,4 +323,6 @@ Version     Änderungen
 13.2.2      Neue Adresse: https://github.com/fixpunkt-com/camaliga
 
             Bugfix: zeige bei Ergebnissen nicht jede Kategorie an, wenn keine Kategorie da ist.
+
+13.2.3      Bugfix: fancybox-Action repariert.
 ==========  =====================================================================================================================

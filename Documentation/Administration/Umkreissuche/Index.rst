@@ -11,14 +11,12 @@ This are the OpenGeoDB tables. The documentation for OpenGeoDB can be found here
 
 http://opengeodb.org/wiki/OpenGeoDB_Dokumentation
 
-The required tables can be found here:
-
-http://www.fa-technik.adfc.de/code/opengeodb/
+The required tables are no longer online!
 
 These 4 tables are required: opengeodb-begin.sql, opengeodb-end.sql, opengeodb_hier.sql
 and one of the country tables, for example, DE.sql. Warning 2/4 tables are huge in size. One can probably only
 import them error-free on the mysql console. With these 4 tables you must produce another table.
-You will find all instructions here `here
+You will find all instructions here: `http://opengeodb.org/wiki/OpenGeoDB_-_Umkreissuche
 <http://opengeodb.org/wiki/OpenGeoDB_-_Umkreissuche>`_.
 
 Anyway, you have to run after import the following SQL statements (replace "de" by your country code)::

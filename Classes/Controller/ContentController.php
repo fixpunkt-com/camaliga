@@ -165,7 +165,7 @@ class ContentController extends ActionController
         }
         $this->settings = $originalSettings;
     }
-    
+
 
     /**
      * action list
@@ -875,9 +875,9 @@ class ContentController extends ActionController
     }
 
     /**
-     * action FancyBox
+     * action Fancybox
      */
-    public function fancyBoxAction(): ResponseInterface
+    public function fancyboxAction(): ResponseInterface
     {
         if ($this->settings['extended']['enable']) {
             $this->listExtendedAction();
