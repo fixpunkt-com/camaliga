@@ -325,4 +325,6 @@ Version     Änderungen
             Bugfix: zeige bei Ergebnissen nicht jede Kategorie an, wenn keine Kategorie da ist.
 
 13.2.3      Bugfix: fancybox-Action repariert.
+
+13.2.5      Upgrade-Skript erneut hinzugefügt.
 ==========  =====================================================================================================================

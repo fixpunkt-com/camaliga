@@ -20,7 +20,7 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-#[UpgradeWizard('camaliga_switchablecontrolleractionsplugin')]
+#[UpgradeWizard('switchableControllerActionsPluginUpdaterCamaliga')]
 class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface {
     private const MIGRATION_SETTINGS = [
         [
@@ -224,7 +224,7 @@ class SwitchableControllerActionsPluginUpdater implements UpgradeWizardInterface
 
     public function getIdentifier(): string
     {
-        return 'camaliga_switchablecontrolleractionsplugin';
+        return 'switchableControllerActionsPluginUpdaterCamaliga';
     }
 
     public function getTitle(): string

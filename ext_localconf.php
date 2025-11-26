@@ -273,7 +273,7 @@ defined('TYPO3') || die();
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\Quizpalme\Camaliga\Evaluation\Double9Evaluation::class] = '';
 
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['camaliga_switchablecontrolleractionsplugin']
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['switchableControllerActionsPluginUpdaterCamaliga']
         = \Quizpalme\Camaliga\Updates\SwitchableControllerActionsPluginUpdater::class;
 
 })();

@@ -321,4 +321,6 @@ Version     Changes
             Bugfix: don´t show every category if there is no category at the result list.
 
 13.2.3      Bugfix: fancybox-action repaired.
+
+13.2.5      Upgrade script added again.
 ==========  ==============================================================================================================================
