@@ -326,5 +326,5 @@ Version     Änderungen
 
 13.2.3      Bugfix: fancybox-Action repariert.
 
-13.2.5      Upgrade-Skript erneut hinzugefügt.
+13.2.5/6    Upgrade-Skript erneut hinzugefügt.
 ==========  =====================================================================================================================

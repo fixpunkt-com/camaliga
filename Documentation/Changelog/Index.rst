@@ -322,5 +322,5 @@ Version     Changes
 
 13.2.3      Bugfix: fancybox-action repaired.
 
-13.2.5      Upgrade script added again.
+13.2.5/6    Upgrade script added again.
 ==========  ==============================================================================================================================

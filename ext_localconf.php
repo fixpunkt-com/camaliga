@@ -274,6 +274,6 @@ defined('TYPO3') || die();
 
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['switchableControllerActionsPluginUpdaterCamaliga']
-        = \Quizpalme\Camaliga\Updates\SwitchableControllerActionsPluginUpdater::class;
+        = \Quizpalme\Camaliga\Upgrades\SwitchableControllerActionsPluginUpdater::class;
 
 })();
