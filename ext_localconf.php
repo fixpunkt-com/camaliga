@@ -1,251 +1,277 @@
 <?php
-use TYPO3\CMS\Core\Information\Typo3Version;
+
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 defined('TYPO3') || die();
 
 (function () {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'List',
         [ \Quizpalme\Camaliga\Controller\ContentController::class => 'list, search, show'  ],
-        [ \Quizpalme\Camaliga\Controller\ContentController::class => 'search'  ]
+        [ \Quizpalme\Camaliga\Controller\ContentController::class => 'search'  ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Listextended',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'listExtended, search, showExtended'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search' ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search' ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Show',
         [   \Quizpalme\Camaliga\Controller\ContentController::class => 'show'        ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Showextended',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'showExtended, show'        ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Carousel',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'carousel'       ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''     ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''     ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Carouselseparated',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'carouselSeparated'        ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => ''        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Map',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'map, search, show'        ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'        ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Openstreetmap',
         [   \Quizpalme\Camaliga\Controller\ContentController::class => 'openstreetmap, search, show'      ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'       ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'       ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Search',
         [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'        ],
-        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'        ]
+        [   \Quizpalme\Camaliga\Controller\ContentController::class => 'search'        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Random',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'random'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'random'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'random'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Responsive',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'responsive'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Teaser',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'teaser, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Elegant',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'elegant'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => ''   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'New',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'new, create'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'new, create'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'new, create'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Bootstrap',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'bootstrap, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Collapse',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'collapse, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Modal',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'modal, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Tab',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'tab, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Ekko',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'ekko, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Elastislide',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'elastislide, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Fancybox',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'fancybox, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Flexslider2',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'flexslider2, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Flipster',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'flipster, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Fullwidth',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'fullwidth, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Galleryview',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'galleryview, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Innerfade',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'innerfade, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Isotope',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'isotope, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Lightslider',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'lightslider, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Magnific',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'magnific, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Nanogallery2',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'nanogallery2, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Owl2',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'owl2, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Parallax',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'parallax, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Responsivecarousel',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'responsiveCarousel, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Roundabout',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'roundabout, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Sgallery',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'sgallery, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Skdslider',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'skdslider, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Camaliga',
         'Slick',
         [  \Quizpalme\Camaliga\Controller\ContentController::class => 'slick, search, show'   ],
-        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ]
+        [  \Quizpalme\Camaliga\Controller\ContentController::class => 'search'   ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-
-
-    // wizards
-    if ((new Typo3Version())->getMajorVersion() < 13) {
-        // @extensionScannerIgnoreLine
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:camaliga/Configuration/TSconfig/ContentElementWizard.tsconfig">');
-
-        // Add page TSConfig für den Linkvalidator
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('linkvalidator')) {
-            // @extensionScannerIgnoreLine
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:camaliga/Configuration/TSconfig/Page/mod.linkvalidator.tsconfig">');
-        }
-    }
 
 
     //BE Hook für Koordinaten
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['camaliga'] = \Quizpalme\Camaliga\Hooks\DataHandlerHook::class;
 
     // Hooks for ke_search
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('ke_search')) {
+    if (ExtensionManagementUtility::isLoaded('ke_search')) {
         // register custom indexer hook
         // adjust this to your namespace and class name
         // adjust the autoloading information in composer.json, too!
@@ -274,6 +300,8 @@ defined('TYPO3') || die();
 
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['switchableControllerActionsPluginUpdaterCamaliga']
-        = \Quizpalme\Camaliga\Upgrades\SwitchableControllerActionsPluginUpdater::class;
+        = \Quizpalme\Camaliga\Updates\SwitchableControllerActionsPluginUpdater::class;
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['camaligaPluginPermissionUpdater']
+        = \Quizpalme\Camaliga\Updates\PluginPermissionUpdater::class;
 })();

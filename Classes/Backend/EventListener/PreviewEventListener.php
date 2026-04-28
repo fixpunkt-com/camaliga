@@ -82,8 +82,9 @@ final class PreviewEventListener
         if ($event->getTable() !== 'tt_content') {
             return;
         }
-        if ($event->getRecord()['CType'] === 'list' && in_array($event->getRecord()['list_type'], $this->pis)) {
-            $pi = substr((string) $event->getRecord()['list_type'], strpos((string) $event->getRecord()['list_type'], '_')+1);
+        if (in_array($event->getRecord()['CType'], $this->pis)) {
+            $this->tableData = [];
+            $pi = substr((string) $event->getRecord()['CType'], strpos((string) $event->getRecord()['CType'], '_')+1);
             $header = '<strong>' . htmlspecialchars((string) $this->getLanguageService()->sL(self::LLPATH . 'template.' . $pi)) . '</strong>';
             $this->flexformData = GeneralUtility::xml2array($event->getRecord()['pi_flexform']);
 

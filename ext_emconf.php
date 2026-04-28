@@ -14,13 +14,13 @@ $EM_CONF[$_EXTKEY] = [
   'title' => 'Camaliga: CArousel/MAp/LIst/GAllery',
   'description' => 'An old carousel/gallery/map/list extension that can use the TYPO3 categories and different jQuery-plugins like Slick. Bootstrap 5 support. Indexer for ke_search.',
   'category' => 'plugin',
-  'version' => '13.2.6',
+  'version' => '13.3.0',
   'state' => 'stable',
   'author' => 'Kurt Gusbeth',
   'author_company' => 'fixpunkt für digitales GmbH',
   'constraints' =>[
     'depends' => [
-      'typo3' => '12.4.0-13.4.99',
+      'typo3' => '13.4.0-13.4.99',
     ],
     'conflicts' => [],
     'suggests' => [],

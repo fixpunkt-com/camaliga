@@ -54,7 +54,7 @@ Here an example for a template (extract) with 2 layouts:
 
    *Image 17: You find this on the Ressources tab of a page*
 
-- Furthermore you can use TSconfig to hide/remove FlexForm-settings. Examples:
+- Furthermore you can use TSconfig to hide/remove FlexForm-settings. Example that wont work anymore:
 
 ::
 

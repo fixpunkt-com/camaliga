@@ -56,7 +56,7 @@ Hier ein Beispiel mit 2 Layouts:
 
    *Abbildung 17: Dies findet man im Ressources-Tab einer Seite*
 
-- Man kann über die TSconfig auch unnötige FlexForm-Felder ausblenden. Ein Beispiel:
+- Man kann über die TSconfig auch unnötige FlexForm-Felder ausblenden. Ein Beispiel, das vermutlich nicht mehr funktioniert:
 
 ::
 

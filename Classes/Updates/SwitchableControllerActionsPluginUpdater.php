@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Quizpalme\Camaliga\Upgrades;
+namespace Quizpalme\Camaliga\Updates;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;

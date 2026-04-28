@@ -3,12 +3,12 @@
  * Register plugins, flexform and remove unused fields
  */
 foreach (['list', 'listextended', 'show', 'showextended', 'carousel', 'carouselseparated', 'new', 'map', 'search', 'openstreetmap', 'random', 'teaser', 'responsive', 'elegant', 'bootstrap', 'collapse', 'modal', 'tab', 'ekko', 'elastislide', 'fancybox', 'flexslider2', 'flipster', 'fullwidth', 'galleryview', 'innerfade', 'isotope', 'lightslider', 'magnific', 'nanogallery2', 'owl2', 'parallax', 'responsivecarousel', 'roundabout', 'sgallery', 'skdslider', 'slick'] as $plugin) {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    $pluginSignature = \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'Camaliga',
         ucfirst($plugin),
         'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.' . $plugin,
         'ext-camaliga-wizard-icon',
-        'Camaliga',
+        'camaliga',
         'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.description'
     );
 
@@ -44,7 +44,6 @@ foreach (['list', 'listextended', 'show', 'showextended', 'carousel', 'carousels
         case 'nanogallery2':
         case 'owl2':
         case 'parallax':
-        case 'elastislide':
         case 'responsivecarousel':
         case 'roundabout':
         case 'sgallery':
@@ -53,9 +52,17 @@ foreach (['list', 'listextended', 'show', 'showextended', 'carousel', 'carousels
             $xml = 'more';
             break;
     }
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['camaliga_' . $plugin] = 'pi_flexform';
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;Configuration,pi_flexform,pages',
+        $pluginSignature,
+        'after:subheader'
+    );
+
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        'camaliga_' . $plugin,
-        'FILE:EXT:camaliga/Configuration/FlexForms/flexform_' . $xml . '.xml'
+        '*',
+        'FILE:EXT:camaliga/Configuration/FlexForms/flexform_' . $xml . '.xml',
+        $pluginSignature
     );
 }
