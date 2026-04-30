@@ -7,38 +7,24 @@
 <f:section name="Content">
 	<f:be.pageRenderer
 			includeCssFiles="{0: 'EXT:camaliga/Resources/Public/Css/Backend.css'}"
-			includeJsFiles="{0: 'EXT:camaliga/Resources/Public/JavaScript/Backend.js'}"
 	/>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
 	<h1><f:translate key="LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:thumb.title" /></h1>
-	<f:translate key="LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:thumb.text" />
 
-    <br><br>
-	<f:if condition="{saved} == 1">
-		<p><strong><f:translate key="LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:thumb.saved" /></strong></p>
-	</f:if>
-	<f:form action="thumb" id="thumbform">
-		<ul id="sortable">
-		<f:for each="{contents}" as="content">
-		  <li class="ui-state-default" id="cami{content.uid}">
-		   <div class="flexme">
-			<div class="ui-icon ui-icon-arrowthick-2-n-s"></div>
-			<div>
-			  <f:if condition="{content.falimage.uid} > 0">
-				<f:image src="{content.falimage.uid}" alt="{content.title}" title="{content.title}" width="120m" height="75m" treatIdAsReference="1" />
-			  </f:if>
-			</div>
-			<div><h3>{content.title}</h3><p>{content.shortdesc}</p></div>
-		   </div>
-		   <f:form.hidden name="camelements[{content.uid}]" id="ecami{content.uid}" value="0" />
-		  </li>
-		</f:for>
-		</ul>
-		<br>
-		<f:form.button type="button" class="btn btn-primary" id="cambutso"><f:translate key="LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:thumb.save" /></f:form.button>
-	</f:form>
+	<ul id="sortable">
+	<f:for each="{contents}" as="content">
+	  <li class="ui-state-default" id="cami{content.uid}">
+	   <div class="flexme">
+		<div class="ui-icon ui-icon-arrowthick-2-n-s"></div>
+		<div>
+		  <f:if condition="{content.falimage.uid} > 0">
+			<f:image src="{content.falimage.uid}" alt="{content.title}" title="{content.title}" width="120m" height="75m" treatIdAsReference="1" />
+		  </f:if>
+		</div>
+		<div><h3>{content.title}</h3><p>{content.shortdesc}</p></div>
+	   </div>
+	  </li>
+	</f:for>
+	</ul>
 
 </f:section>
 </html>

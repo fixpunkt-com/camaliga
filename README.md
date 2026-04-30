@@ -1,6 +1,6 @@
 # camaliga
 
-Version 13.3.0
+Version 14.0.0
 
 A carousel/gallery/map/list extension that can use the TYPO3 categories and different jQuery-plugins like Slick.
 Bootstrap 5 support. Indexer for ke_search. Many features.
@@ -52,3 +52,6 @@ Version 13.2.5/6:
 
 Version 13.3.0:
 - Migration from list_type to CType.
+ 
+Version 14.0.0:
+- First version for TYPO3 14.

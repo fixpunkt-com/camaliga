@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use Quizpalme\Camaliga\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Attribute as Extbase;
 
 /***************************************************************
  *  Copyright notice

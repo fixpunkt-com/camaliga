@@ -2,16 +2,8 @@
 /**
  * Register plugins, flexform and remove unused fields
  */
+$extensionName = 'camaliga';
 foreach (['list', 'listextended', 'show', 'showextended', 'carousel', 'carouselseparated', 'new', 'map', 'search', 'openstreetmap', 'random', 'teaser', 'responsive', 'elegant', 'bootstrap', 'collapse', 'modal', 'tab', 'ekko', 'elastislide', 'fancybox', 'flexslider2', 'flipster', 'fullwidth', 'galleryview', 'innerfade', 'isotope', 'lightslider', 'magnific', 'nanogallery2', 'owl2', 'parallax', 'responsivecarousel', 'roundabout', 'sgallery', 'skdslider', 'slick'] as $plugin) {
-    $pluginSignature = \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'Camaliga',
-        ucfirst($plugin),
-        'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.' . $plugin,
-        'ext-camaliga-wizard-icon',
-        'camaliga',
-        'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.description'
-    );
-
     $xml = 'pi1';
     switch ($plugin) {
         case 'teaser':
@@ -52,17 +44,16 @@ foreach (['list', 'listextended', 'show', 'showextended', 'carousel', 'carousels
             $xml = 'more';
             break;
     }
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'tt_content',
-        '--div--;Configuration,pi_flexform,pages',
-        $pluginSignature,
-        'after:subheader'
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        'Camaliga',
+        ucfirst($plugin),
+        'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.' . $plugin,
+        'ext-camaliga-wizard-icon',
+        'Camaliga',
+        'LLL:EXT:camaliga/Resources/Private/Language/locallang_be.xlf:template.description',
+        'FILE:EXT:camaliga/Configuration/FlexForms/flexform_' . $xml . '.xml'
     );
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        '*',
-        'FILE:EXT:camaliga/Configuration/FlexForms/flexform_' . $xml . '.xml',
-        $pluginSignature
-    );
+    $pluginSignature = $extensionName . '_' . $plugin;
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pages', $pluginSignature, 'after:subheader');
 }

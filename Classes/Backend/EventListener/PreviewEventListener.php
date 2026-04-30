@@ -6,7 +6,6 @@ namespace Quizpalme\Camaliga\Backend\EventListener;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Backend\View\BackendViewFactory;
 use TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -82,14 +81,15 @@ final class PreviewEventListener
         if ($event->getTable() !== 'tt_content') {
             return;
         }
-        if (in_array($event->getRecord()['CType'], $this->pis)) {
+        if (in_array($event->getRecordType(), $this->pis)) {
             $this->tableData = [];
-            $pi = substr((string) $event->getRecord()['CType'], strpos((string) $event->getRecord()['CType'], '_')+1);
+            $pi = substr((string) $event->getRecordType(), strpos((string) $event->getRecordType(), '_')+1);
             $header = '<strong>' . htmlspecialchars((string) $this->getLanguageService()->sL(self::LLPATH . 'template.' . $pi)) . '</strong>';
-            $this->flexformData = GeneralUtility::xml2array($event->getRecord()['pi_flexform']);
-
-            $this->getStartingPoint($event->getRecord()['pages']);
-
+            $record = $event->getRecord()->getRawRecord()->toArray();
+            if (isset($record['pi_flexform'])) {
+                $this->flexformData = GeneralUtility::xml2array($record['pi_flexform']);
+                $this->getStartingPoint($record['pages']);
+            }
             if (is_array($this->flexformData)) {
                 foreach ($this->recordMapping as $fieldName => $fieldConfiguration) {
                     $value = $this->getFieldFromFlexform('settings.' . $fieldName);
@@ -102,7 +102,7 @@ final class PreviewEventListener
                     }
                 }
             }
-            $event->setPreviewContent($this->renderSettingsAsTable($header, $event->getRecord()['uid']));
+            $event->setPreviewContent($this->renderSettingsAsTable($header, $record['uid']));
         }
     }
 
@@ -120,7 +120,7 @@ final class PreviewEventListener
 
         if (is_array($record)) {
             $data = '<span data-toggle="tooltip" data-placement="top" data-title="id=' . $record['uid'] . '">'
-                . $this->iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render()
+                . $this->iconFactory->getIconForRecord($table, $record, \TYPO3\CMS\Core\Imaging\IconSize::SMALL)->render()
                 . '</span> &nbsp;';
             $content = BackendUtilityCore::wrapClickMenuOnIcon($data, $table, $record['uid']);
             $content .= htmlspecialchars(BackendUtilityCore::getRecordTitle($table, $record));

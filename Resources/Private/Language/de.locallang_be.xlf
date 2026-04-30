@@ -644,18 +644,6 @@
 				<source>Sorted thumbnail overview</source>
 				<target>Sortierte Bilder-Übersicht</target>
 			</trans-unit>
-			<trans-unit id="thumb.text" resname="thumb.text">
-				<source>In this sorted view of all visible elements you can change the order of the elements:</source>
-				<target>Bei dieser sortierten Ansicht aller sichtbaren Elemente kann man die Reihenfolge ändern:</target>
-			</trans-unit>
-			<trans-unit id="thumb.save" resname="thumb.save">
-				<source>Save the new order</source>
-				<target>Neue Reihenfolge abspeichern</target>
-			</trans-unit>
-			<trans-unit id="thumb.saved" resname="thumb.saved">
-				<source>The order of the visible elements has been changed / saved!</source>
-				<target>Die Reihenfolge der sichtbaren Elemente wurde geändert / gespeichert!</target>
-			</trans-unit>
 			<trans-unit id="pagelayoutview" resname="pagelayoutview">
 				<source>CaMaLiGa plugin settings:</source>
 				<target>CaMaLiGa-PlugIn-Einstellungen:</target>

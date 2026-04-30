@@ -75,8 +75,8 @@ class HelpersUtility
             $metaTagManager->addProperty('description', $desc);
         }
         if ($settings['seo']['setIndexedDocTitle'] == 1) {
-            // TODO: ausbauen, da ab TYPO3 12 internal
-            $GLOBALS['TSFE']->indexedDocTitle = $title;
+            // TODO: ersetzen, da ab TYPO3 12 internal
+            //$GLOBALS['TSFE']->indexedDocTitle = $title;
         }
         if ($settings['seo']['setOgTitle'] == 1) {
             //$this->response->addAdditionalHeaderData('<meta property="og:title" content="' . $title .'">');
@@ -94,8 +94,6 @@ class HelpersUtility
             $image = '';
             if ($content->getFalimage() && $content->getFalimage()->getUid()) {
                 $typo3FALRepository = GeneralUtility::makeInstance(FileRepository::class);
-                // gibt es nicht mehr in T13:
-                //$fileObject = $typo3FALRepository->findFileReferenceByUid($content->getFalimage()->getUid());
                 $fileObject = $typo3FALRepository->findByRelation(
                     'tx_camaliga_domain_model_content',
                     'falimage',
@@ -103,11 +101,14 @@ class HelpersUtility
                 );
                 if (is_array($fileObject) && is_object($fileObject[0])) {
                     $fileObjectData = $fileObject[0]->toArray();
-                    $image = $server . '/' . $fileObjectData['url'];
+                    $imgUrl = $fileObjectData['url'];
+                    if (substr($imgUrl, 0, 1) == '/') {
+                        $imgUrl = substr($imgUrl, 1);
+                    }
+                    $image = $server . '/' . $imgUrl;
                 }
             }
             if ($image) {
-                //$this->response->addAdditionalHeaderData('<meta property="og:image" content="' . $image . '">');
                 $metaTagManager = $MetaTagManagerRegistry->getManagerForProperty('og:image');
                 $metaTagManager->addProperty('og:image', $image);
                 //$metaTagManager->addProperty('og:image:width', $fileObjectData['width']);

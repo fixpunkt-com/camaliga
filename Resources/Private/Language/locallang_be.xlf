@@ -501,15 +501,6 @@
 			<trans-unit id="thumb.title" resname="thumb.title">
 				<source>Sorted thumbnail overview</source>
 			</trans-unit>
-			<trans-unit id="thumb.text" resname="thumb.text">
-				<source>In this sorted view of all visible elements you can change the order of the elements:</source>
-			</trans-unit>
-			<trans-unit id="thumb.save" resname="thumb.save">
-				<source>Save the new order</source>
-			</trans-unit>
-			<trans-unit id="thumb.saved" resname="thumb.saved">
-				<source>The order of the visible elements has been changed / saved!</source>
-			</trans-unit>
 			<trans-unit id="pagelayoutview" resname="pagelayoutview">
 				<source>CaMaLiGa plugin settings:</source>
 			</trans-unit>

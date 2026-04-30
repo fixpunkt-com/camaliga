@@ -298,10 +298,4 @@ defined('TYPO3') || die();
     // TCA-Validator
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\Quizpalme\Camaliga\Evaluation\Double9Evaluation::class] = '';
 
-
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['switchableControllerActionsPluginUpdaterCamaliga']
-        = \Quizpalme\Camaliga\Updates\SwitchableControllerActionsPluginUpdater::class;
-
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['camaligaPluginPermissionUpdater']
-        = \Quizpalme\Camaliga\Updates\PluginPermissionUpdater::class;
 })();

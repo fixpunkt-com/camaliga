@@ -1,15 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<!-- https://docs.typo3.org/m/typo3/reference-coreapi/12.4/en-us/ApiOverview/ContentSecurityPolicy/Index.html -->
-<script nonce="{f:security.nonce()}" type="module">
-    //import $ from 'jquery';
-    (() => {
-        document.addEventListener('DOMContentLoaded', function(){
-            $( "#sortable" ).sortable();
-            $( "#sortable" ).disableSelection();
-        }, false);
-    })();
-</script>
 <div id="camaliga-main-content">
     <f:flashMessages />
     <f:render section="Content" />

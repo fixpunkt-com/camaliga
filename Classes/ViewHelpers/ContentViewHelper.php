@@ -29,27 +29,20 @@ class ContentViewHelper extends AbstractTagBasedViewHelper
  protected $contentRepository = NULL;
 	
 	/**
-  * Constructor
-  */
- public function __construct(\Quizpalme\Camaliga\Domain\Repository\ContentRepository $contentRepository)
- {
-     parent::__construct();
-     $this->contentRepository = $contentRepository;
- }
-	
-	public function initializeArguments(): void
-	{
-		parent::initializeArguments();
-		//$this->registerUniversalTagAttributes();
-		$this->registerArgument('param', 'string', 'Parameter of the tag');
-	}
-	
+      * Constructor
+      */
+     public function __construct(\Quizpalme\Camaliga\Domain\Repository\ContentRepository $contentRepository)
+     {
+         parent::__construct();
+         $this->contentRepository = $contentRepository;
+     }
+
 	/**
 	 * Content-ViewHelper
 	 *
 	 * @return string $result
 	 */
-	public function render()
+	public function render(): string
 	{
 	    if (isset($_GET['tx_camaliga_show']))
 	        $camaligaArray = $_GET['tx_camaliga_show'];
@@ -92,7 +85,7 @@ class ContentViewHelper extends AbstractTagBasedViewHelper
 		return str_replace(
 			array_keys($row),
 			array_values($row),
-			(string) $this->arguments['param']
+			(string) $this->additionalArguments['param']
 		);
 	}
 }

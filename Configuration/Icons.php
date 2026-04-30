@@ -6,7 +6,7 @@ return [
     ],
     'extension-camaliga-module' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-        'source' => 'EXT:camaliga/Resources/Public/Icons/Extension.gif'
+        'source' => 'EXT:camaliga/Resources/Public/Icons/tx_camaliga_module.gif'
     ],
     'ext-camaliga-folder-icon' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,

@@ -4,12 +4,12 @@ namespace Quizpalme\Camaliga\Controller;
 use Quizpalme\Camaliga\Utility\HelpersUtility;
 use Quizpalme\Camaliga\Domain\Repository\ContentRepository;
 use Quizpalme\Camaliga\Domain\Repository\CategoryRepository;
+use Quizpalme\Camaliga\Domain\Model\Content;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Resource\DuplicationBehavior;
 use TYPO3\CMS\Extbase\Service\ImageService;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
@@ -18,7 +18,8 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
-use Quizpalme\Camaliga\Domain\Model\Content;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewFactoryData;
 use Psr\Http\Message\ResponseInterface;
 
 /***************************************************************
@@ -75,7 +76,10 @@ class ContentController extends ActionController
      * @var string	Pfad zu den Templates
      */
     protected $templatePath;
-    public function __construct(\Quizpalme\Camaliga\Domain\Repository\ContentRepository $contentRepository, \Quizpalme\Camaliga\Utility\HelpersUtility $helpersUtility)
+    protected $layoutPath;
+    protected $partialPath;
+
+    public function __construct(private readonly ViewFactoryInterface $viewFactory, ContentRepository $contentRepository, HelpersUtility $helpersUtility)
     {
         $this->contentRepository = $contentRepository;
         $this->helpersUtility = $helpersUtility;
@@ -93,6 +97,22 @@ class ContentController extends ActionController
             if (isset($tsSettings['plugin.']['tx_camaliga.']['view.']['templateRootPaths.'][$i])) {
                 $this->templatePath = $tsSettings['plugin.']['tx_camaliga.']['view.']['templateRootPaths.'][$i];
                 if ($this->templatePath) {
+                    break;
+                }
+            }
+        }
+        for ($i=10; $i>0; $i--) {
+            if (isset($tsSettings['plugin.']['tx_camaliga.']['view.']['layoutRootPaths.'][$i])) {
+                $this->layoutPath = $tsSettings['plugin.']['tx_camaliga.']['view.']['layoutRootPaths.'][$i];
+                if ($this->layoutPath) {
+                    break;
+                }
+            }
+        }
+        for ($i=10; $i>0; $i--) {
+            if (isset($tsSettings['plugin.']['tx_camaliga.']['view.']['partialRootPaths.'][$i])) {
+                $this->partialPath = $tsSettings['plugin.']['tx_camaliga.']['view.']['partialRootPaths.'][$i];
+                if ($this->partialPath) {
                     break;
                 }
             }
@@ -553,6 +573,7 @@ class ContentController extends ActionController
                 'debug' => $debug
             ]
         );
+     //   return $this->view->render();
         return $this->htmlResponse();
     }
 
@@ -611,7 +632,14 @@ class ContentController extends ActionController
             $template = $this->settings['extended']['template'];
         }
         if ($template) {
-            $this->view->setTemplatePathAndFilename($this->templatePath . 'Content/' . $template . '.html');
+            $viewFactoryData = new ViewFactoryData(
+                templateRootPaths: [$this->templatePath],
+                partialRootPaths: [$this->partialPath],
+                layoutRootPaths: [$this->layoutPath],
+                templatePathAndFilename: $this->templatePath . 'Content/' . $template . '.html',
+                request: $this->request,
+            );
+            $this->view = $this->viewFactory->create($viewFactoryData);
         }
         $this->listExtendedAction();
         return $this->htmlResponse();
@@ -1138,13 +1166,14 @@ class ContentController extends ActionController
             // https://stackoverflow.com/questions/57828620/how-to-access-uploaded-files-in-frontend-in-the-controller-in-typo3
             // https://www.ophidia.net/typo3-8-filereference-aus-bild-erzeugen/
             $uploadedFileData = $this->request->getArgument('image'); //$_FILES['image'];
-            if (str_starts_with((string) $uploadedFileData['type'], 'image')) {
+            if (str_starts_with((string) $uploadedFileData->getClientMediaType(), 'image')) {
                 $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
-                $storage = $resourceFactory->getDefaultStorage();
+                $storageRepository = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\StorageRepository::class);
+                $storage = $storageRepository->getDefaultStorage();
                 $delete1 = '';
                 $delete2 = '';
                 if ($this->settings['getLatLon']) {
-                    $position = $this->helpersUtility->getLatLonOfImage($uploadedFileData['tmp_name']);
+                    $position = $this->helpersUtility->getLatLonOfImage($uploadedFileData->getTemporaryFileName());
                 }
 
                 # check if target folder exist or create it
@@ -1155,7 +1184,7 @@ class ContentController extends ActionController
                 }
 
                 # add uploaded file
-                $imageFile = $targetFolder->addUploadedFile($uploadedFileData, DuplicationBehavior::RENAME);
+                $imageFile = $targetFolder->addUploadedFile($uploadedFileData, \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior::RENAME);
                 $infos = $imageFile->getProperties();
 
                 if (($infos['width'] > $this->settings['img']['width']) || ($infos['height'] > $this->settings['img']['height'])) {
@@ -1165,14 +1194,18 @@ class ContentController extends ActionController
                     $imageFileResized = $imageService->applyProcessingInstructions($imageFile, $processingInstructions);
                     $persistenceManager->persistAll();
                     // aufräumen, geht hier aber noch nicht: $imageFile->delete(); und $imageFileResized->delete();
-                    $imageFileToUse = $imageFileResized->copyTo($targetFolder);
                     $delete1 = $imageService->getImageUri($imageFile);
-                    $delete2 = $imageService->getImageUri($imageFileResized);
+                    //$delete2 = $imageService->getImageUri($imageFileResized); will now be kept
+                    // TODO: $imageFileResized ist ein sys_file_processedfile und muss zu sys_file konvertiert werden!
+                    $imageFileToUse = $imageFileResized;
+                        // TODO: instead of $imageFileResized->copyTo($targetFolder);
                 } else {
                     $imageFileToUse = $imageFile;
                 }
 
                 # create reference; but not all Options are used :-(
+                //echo "file: " . $imageFileToUse->getUid() . ' vs. ' . $uid . "\n";
+                // https://docs.typo3.org/m/typo3/reference-coreapi/13.4/en-us/ApiOverview/Fal/UsingFal/ExamplesFileFolder.html#copying-a-file
                 $falFileReference = $resourceFactory->createFileReferenceObject(
                     [
                         'uid_local' => $imageFileToUse->getUid(),
