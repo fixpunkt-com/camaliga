@@ -328,5 +328,5 @@ Version     Änderungen
 
 13.2.5/6    Upgrade-Skript erneut hinzugefügt.
 
-13.3.0      Update-Skript für list_type nach CType Konvertierung hinzugefügt.
+14.0.0      Breaking: Update-Skript für list_type nach CType Konvertierung hinzugefügt.
 ==========  =====================================================================================================================
