@@ -591,7 +591,7 @@ class ContentRepository extends Repository
      *
      * @return integer
      */
-    public function getSiteRoot()
+    public function getSiteRoot(): int
     {
     	$uid = 1;
     	$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
@@ -615,7 +615,7 @@ class ContentRepository extends Repository
      * @param	int	$uid	UID of a file
      * @return string
      */
-    public function getFileLink($uid)
+    public function getFileLink($uid): string
     {
     	$output = '';
     	$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file');
@@ -631,5 +631,35 @@ class ContentRepository extends Repository
    			$output = ($row['storage'] == 1) ? '/fileadmin' . $row['identifier'] : $row['identifier'];
    		}
    		return $output;
+    }
+
+    /**
+     * Update image information and deleted processed file
+     *
+     * @param int	$uid   UID of a file
+     * @param array $infos Infos to update
+     * @return void
+     */
+    public function updateImageInfos($uid, $infos): void
+    {
+        $table = 'sys_file';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
+        $queryBuilder
+            ->update($table)
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \TYPO3\CMS\Core\Database\Connection::PARAM_INT))
+            )
+            ->set('size', intval($infos['size']))
+            ->executeStatement();
+        $table = 'sys_file_metadata';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
+        $queryBuilder
+            ->update($table)
+            ->where(
+                $queryBuilder->expr()->eq('file', $queryBuilder->createNamedParameter($uid, \TYPO3\CMS\Core\Database\Connection::PARAM_INT))
+            )
+            ->set('width', intval($infos['width']))
+            ->set('height', intval($infos['height']))
+            ->executeStatement();
     }
 }

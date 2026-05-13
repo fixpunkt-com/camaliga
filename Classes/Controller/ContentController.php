@@ -1157,6 +1157,7 @@ class ContentController extends ActionController
         $position = [];					// GPS-Koordinaten
         $categoryUids = [];				// was ausgewählt wurde
         $uid = $content->getUid();
+        $imageUri = '';
 
         if ($this->request->hasArgument('image')) {
             // Alte Lösungen für einen Bild-Upload:
@@ -1185,68 +1186,57 @@ class ContentController extends ActionController
 
                 # add uploaded file
                 $imageFile = $targetFolder->addUploadedFile($uploadedFileData, \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior::RENAME);
-                $infos = $imageFile->getProperties();
-
-                if (($infos['width'] > $this->settings['img']['width']) || ($infos['height'] > $this->settings['img']['height'])) {
-                    # resize uploaded image       //$image = $imageService->getImage($imgPath);
+                if ($imageFile) {
+                    $infos = $imageFile->getProperties();
                     $imageService = GeneralUtility::makeInstance(ImageService::class);
-                    $processingInstructions = ['maxWidth' => $this->settings['img']['width'], 'maxHeight' => $this->settings['img']['height']];
-                    $imageFileResized = $imageService->applyProcessingInstructions($imageFile, $processingInstructions);
-                    $persistenceManager->persistAll();
-                    // aufräumen, geht hier aber noch nicht: $imageFile->delete(); und $imageFileResized->delete();
-                    $delete1 = $imageService->getImageUri($imageFile);
-                    //$delete2 = $imageService->getImageUri($imageFileResized); will now be kept
-                    // TODO: $imageFileResized ist ein sys_file_processedfile und muss zu sys_file konvertiert werden!
-                    $imageFileToUse = $imageFileResized;
-                        // TODO: instead of $imageFileResized->copyTo($targetFolder);
-                } else {
-                    $imageFileToUse = $imageFile;
+                    $imageUri = $imageService->getImageUri($imageFile);
+
+                    if (($this->settings['img']['width'] || $this->settings['img']['height']) &&
+                        ($infos['width'] > $this->settings['img']['width']) || ($infos['height'] > $this->settings['img']['height'])) {
+                        # resize uploaded image       //$image = $imageService->getImage($imgPath);
+                        $processingInstructions = ['maxWidth' => $this->settings['img']['width'], 'maxHeight' => $this->settings['img']['height']];
+                        $imageFileResized = $imageService->applyProcessingInstructions($imageFile, $processingInstructions);
+                        $infos2 = $imageFileResized->getProperties();
+                        $imageToCopy = $imageService->getImageUri($imageFileResized);
+                        // Das verkleinerte Bild über das original kopieren und die Daten vom verkleinerten Bild übernehmen
+                        copy(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageToCopy,
+                            \TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageUri);
+                        if ($this->settings['debug']) {
+                            $debug .= 'Copy resized image ' . $imageToCopy . ' to ' . $imageUri . ' (uid=' . $infos['uid'] . ")\n";
+                        }
+                        $this->contentRepository->updateImageInfos($infos['uid'], $infos2);
+                        $imageFileResized->delete();  // klappt leider nicht
+                        $persistenceManager->persistAll();
+                        //unlink(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageToCopy);
+                    }
+
+                    # create reference; but not all Options are used :-(
+                    // https://docs.typo3.org/m/typo3/reference-coreapi/13.4/en-us/ApiOverview/Fal/UsingFal/ExamplesFileFolder.html#copying-a-file
+                    $falFileReference = $resourceFactory->createFileReferenceObject(
+                        [
+                            'uid_local' => $imageFile->getUid(),
+                            'uid_foreign' => $uid,
+                            'uid' => uniqid('NEW_'),
+                            'tablenames' => 'tx_camaliga_domain_model_content',
+                            'fieldname' => 'falimage',
+                            'crop' => null,
+                        ]
+                    );
+                    $imageFileReference = GeneralUtility::makeInstance(FileReference::class);
+                    $imageFileReference->setOriginalResource($falFileReference);
+
+                    # set reference and position in Camaliga
+                    $content->setFalimage($imageFileReference);
+                    if ($this->settings['debug']) {
+                        $debug .= 'Uploaded image: ' . $infos['identifier'] . "\n";
+                    }
                 }
-
-                # create reference; but not all Options are used :-(
-                //echo "file: " . $imageFileToUse->getUid() . ' vs. ' . $uid . "\n";
-                // https://docs.typo3.org/m/typo3/reference-coreapi/13.4/en-us/ApiOverview/Fal/UsingFal/ExamplesFileFolder.html#copying-a-file
-                $falFileReference = $resourceFactory->createFileReferenceObject(
-                    [
-                        'uid_local' => $imageFileToUse->getUid(),
-                        'uid_foreign' => $uid,
-                        'uid' => uniqid('NEW_'),
-                        'tablenames' => 'tx_camaliga_domain_model_content',
-                        'fieldname' => 'falimage',
-                        'crop' => null,
-                    ]
-                );
-                $imageFileReference = GeneralUtility::makeInstance(FileReference::class);
-                $imageFileReference->setOriginalResource($falFileReference);
-
-                # set reference and position in Camaliga
-                $content->setFalimage($imageFileReference);
                 if ($position['latitude']) {
                     $content->setLatitude($position['latitude']);
                     $content->setLongitude($position['longitude']);
                 }
                 $this->contentRepository->update($content);
                 $persistenceManager->persistAll();
-                if ($content->getFalimage()) {
-                    // the FAL image is not set correct in sys_file_reference. We correct that...
-                    $falID = $content->getFalimage()->getUid();
-                    $content->repairFALreference($falID);
-                    if ($this->settings['debug']) {
-                        $debug .= 'Uploaded image: ' . $infos['identifier'] . "\n";
-                    }
-                }
-                if ($delete1) {
-                    $imageFile->delete();
-                    if ($this->settings['debug']) {
-                        $debug .= 'Deleting this image (1): ' . $delete1 . "\n";
-                    }
-                }
-                if ($delete2) {
-                    $imageFileResized->delete();
-                    if ($this->settings['debug']) {
-                        $debug .= 'Deleting this image (2): ' . $delete2 . "\n";
-                    }
-                }
             }
         }
 
@@ -1307,6 +1297,7 @@ class ContentController extends ActionController
 
         // Anzeige
         $this->view->assign('content', $content);
+        $this->view->assign('image', $imageUri);
         $this->view->assign('debug', $debug);
         $this->view->assign('categories', $cats);
         //$this->view->assign('data', $infos);

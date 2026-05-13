@@ -50,7 +50,7 @@ final class PreviewEventListener
      *
      * @var array
      */
-    protected $pis = ['camaliga_list','camaliga_listextended','camaliga_show','camaliga_showextended','camaliga_carousel','camaliga_carouselseparated','camaliga_map','camaliga_search','camaliga_openstreetmap','camaliga_random','camaliga_teaser','camaliga_responsive','camaliga_elegant','camaliga_bootstrap','camaliga_collapse','camaliga_modal','camaliga_tab','camaliga_ekko','camaliga_elastislide','camaliga_fancybox','camaliga_flexslider2','camaliga_flipster','camaliga_fullwidth','camaliga_galleryview','camaliga_innerfade','camaliga_isotope','camaliga_lightslider','camaliga_magnific','camaliga_nanogallery2','camaliga_owl2','camaliga_parallax','camaliga_responsivecarousel','camaliga_roundabout','camaliga_sgallery','camaliga_skdslider','camaliga_slick'];
+    protected $pis = ['camaliga_list','camaliga_listextended','camaliga_show','camaliga_showextended','camaliga_new','camaliga_carousel','camaliga_carouselseparated','camaliga_map','camaliga_search','camaliga_openstreetmap','camaliga_random','camaliga_teaser','camaliga_responsive','camaliga_elegant','camaliga_bootstrap','camaliga_collapse','camaliga_modal','camaliga_tab','camaliga_ekko','camaliga_elastislide','camaliga_fancybox','camaliga_flexslider2','camaliga_flipster','camaliga_fullwidth','camaliga_galleryview','camaliga_innerfade','camaliga_isotope','camaliga_lightslider','camaliga_magnific','camaliga_nanogallery2','camaliga_owl2','camaliga_parallax','camaliga_responsivecarousel','camaliga_roundabout','camaliga_sgallery','camaliga_skdslider','camaliga_slick'];
 
     /**
      * Table information
