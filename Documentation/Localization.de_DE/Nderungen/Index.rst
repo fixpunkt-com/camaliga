@@ -328,9 +328,9 @@ Version     Änderungen
 
 13.2.5/6    Upgrade-Skript erneut hinzugefügt.
 
-13.3.0      Update-Skript für list_type nach CType Konvertierung hinzugefügt.
+14.0.0      Breaking: Update-Skript für list_type nach CType Konvertierung hinzugefügt.
 
-14.0.0      Erste Version für TYPO3 14.
+14.1.0      Erste Version für TYPO3 14.
 
             Upgrade-Skripte wieder entfernt. Backend-Modul zurückgebaut.
 ==========  =====================================================================================================================

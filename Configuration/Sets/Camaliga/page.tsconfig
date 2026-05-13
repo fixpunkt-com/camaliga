@@ -1,0 +1,5 @@
+templates.quizpalme/camaliga.1  = quizpalme/camaliga:Resources/Private/Templates/
+
+mod.linkvalidator.searchFields {
+    tx_camaliga_domain_model_content = longdesc,link
+}

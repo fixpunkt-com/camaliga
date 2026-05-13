@@ -3,8 +3,8 @@
 Das Backend-Modul
 ^^^^^^^^^^^^^^^^^
 
-- Das Camaliga-Backend-Modul hat 2 Features: Alphabetische Auflistung der Camaliga-
-  Elemente eines Ordners/Dokuments und Bilder-Liste eines Ordner mit Sortierfunktion.
+- Das Camaliga-Backend-Modul hat 1 Feature: Alphabetische Auflistung der Camaliga-
+  Elemente eines Ordners/Dokuments mit Bilder-Liste.
 
 .. figure:: /Images/backend_sortierung.jpg
 
