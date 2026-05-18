@@ -275,6 +275,7 @@ class ContentController extends ActionController
             $this->view->assign('itemHeight', $widthHeights['itemHeight']);
             $this->view->assign('onlySearchForm', 0);
             $this->view->assign('debug', $debug);
+            $this->view->assign('settings', $this->settings);
         }
         return $this->htmlResponse();
     }
@@ -570,7 +571,8 @@ class ContentController extends ActionController
                 'sword' => $sword,
                 'place' => $place,
                 'radius' => $radius,
-                'debug' => $debug
+                'debug' => $debug,
+                'settings' => $this->settings
             ]
         );
      //   return $this->view->render();

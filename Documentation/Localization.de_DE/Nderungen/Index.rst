@@ -333,4 +333,6 @@ Version     Änderungen
 14.1.0      Erste Version für TYPO3 14.
 
             Upgrade-Skripte wieder entfernt. Backend-Modul zurückgebaut.
+
+14.1.1      Bugfix: fehlende Settings nach Redirect.
 ==========  =====================================================================================================================
