@@ -335,4 +335,8 @@ Version     Änderungen
             Upgrade-Skripte wieder entfernt. Backend-Modul zurückgebaut.
 
 14.1.1      Bugfix: fehlende Settings nach Redirect.
+
+14.2.0      TypoScript-Dateien nach .typoscript umbenannt.
+
+            Der Datei-Upload funktioniert nun komplett mit TYPO3-Methoden.
 ==========  =====================================================================================================================

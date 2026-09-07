@@ -331,4 +331,8 @@ Version     Changes
             Upgrade script removed again. Backend module reduced.
 
 14.1.1      Bugfix: missing settings after redirect.
+
+14.2.0      TypoScript files renamed to .typoscript
+
+            File-uploads works now with TYPO3 methods.
 ==========  ==============================================================================================================================

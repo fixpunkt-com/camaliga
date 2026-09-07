@@ -1192,6 +1192,7 @@ class ContentController extends ActionController
                     $infos = $imageFile->getProperties();
                     $imageService = GeneralUtility::makeInstance(ImageService::class);
                     $imageUri = $imageService->getImageUri($imageFile);
+                    $imageIdentifier = substr($imageUri, strrpos($imageUri, '/', -1) + 1);
 
                     if (($this->settings['img']['width'] || $this->settings['img']['height']) &&
                         ($infos['width'] > $this->settings['img']['width']) || ($infos['height'] > $this->settings['img']['height'])) {
@@ -1201,13 +1202,26 @@ class ContentController extends ActionController
                         $infos2 = $imageFileResized->getProperties();
                         $imageToCopy = $imageService->getImageUri($imageFileResized);
                         // Das verkleinerte Bild über das original kopieren und die Daten vom verkleinerten Bild übernehmen
-                        copy(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageToCopy,
-                            \TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageUri);
+                        $fileadminFolder = $storage->getRootLevelFolder();
+                        $tmp = substr($imageService->getImageUri($imageFileResized), strpos($imageFileResized->getPublicUrl(), '/', 1)+1);
+                        /** @var \TYPO3\CMS\Core\Resource\File $fileProcessed */
+                        $fileProcessed = $fileadminFolder->getFile($tmp);
+                        /** @var \TYPO3\CMS\Core\Resource\File $newFile */
+                        $newFile = $storage->copyFile(
+                            $fileProcessed,
+                            $targetFolder,
+                            $imageIdentifier,
+                            \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior::REPLACE
+                        );
+                        // alt:
+                        // copy(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageToCopy,
+                        //    \TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageUri);
                         if ($this->settings['debug']) {
                             $debug .= 'Copy resized image ' . $imageToCopy . ' to ' . $imageUri . ' (uid=' . $infos['uid'] . ")\n";
                         }
                         $this->contentRepository->updateImageInfos($infos['uid'], $infos2);
-                        $imageFileResized->delete();  // klappt leider nicht
+                        //$imageFileResized->delete();  // klappt leider nicht
+                        $fileProcessed->delete();   // klappt
                         $persistenceManager->persistAll();
                         //unlink(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . $imageToCopy);
                     }
@@ -1233,9 +1247,12 @@ class ContentController extends ActionController
                         $debug .= 'Uploaded image: ' . $infos['identifier'] . "\n";
                     }
                 }
-                if ($position['latitude']) {
+                if (isset($position['latitude']) && isset($position['longitude']) && $position['latitude']) {
                     $content->setLatitude($position['latitude']);
                     $content->setLongitude($position['longitude']);
+                } else {
+                    $position['latitude'] = 0;
+                    $position['longitude'] = 0;
                 }
                 $this->contentRepository->update($content);
                 $persistenceManager->persistAll();
